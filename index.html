@@ -93,10 +93,10 @@
             const locationInput = document.getElementById('location');
             const location = locationInput.value;
 
-            fetch(https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric)
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`)
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error(HTTP error! Status: ${response.status});
+                        throw new Error(`HTTP error! Status: ${response.status}`);
                     }
                     return response.json();
                 })
@@ -104,19 +104,19 @@
                     const weatherDescription = data.weather[0].description;
                     const temperature = data.main.temp;
                     const humidity = data.main.humidity;
-                    const rainChances = data.rain ? Rain Chances: ${data.rain['1h']}mm : 'No Rain';
+                    const rainChances = data.rain ? `Rain Chances: ${data.rain['1h']}mm` : 'No Rain';
                     const suggestions = getWeatherSuggestions(temperature);
 
-                    document.getElementById('weather-description').innerText = Weather: ${weatherDescription};
-                    document.getElementById('temperature').innerText = Temperature: ${temperature}°C;
-                    document.getElementById('humidity').innerText = Humidity: ${humidity}%;
+                    document.getElementById('weather-description').innerText = `Weather: ${weatherDescription}`;
+                    document.getElementById('temperature').innerText = `Temperature: ${temperature}°C`;
+                    document.getElementById('humidity').innerText = `Humidity: ${humidity}%`;
                     document.getElementById('rain-chances').innerText = rainChances;
-                    document.getElementById('suggestions').innerText = Suggestions: ${suggestions.join(', ')};
+                    document.getElementById('suggestions').innerText = `Suggestions: ${suggestions.join(', ')}`;
                     document.getElementById('error-message').innerText = ''; // Clear any previous error messages
                 })
                 .catch(error => {
                     console.error('Error fetching weather data:', error);
-                    document.getElementById('error-message').innerText = Error fetching weather data: ${error.message};
+                    document.getElementById('error-message').innerText = `Error fetching weather data: ${error.message}`;
                 });
         }
 
